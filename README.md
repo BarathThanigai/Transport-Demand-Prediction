@@ -1,116 +1,53 @@
 Project Overview
 
-This project focuses on building a regression-based machine learning system to forecast the number of seats likely to be sold per ride. The system is designed to help transportation providers make informed decisions regarding capacity planning, pricing, and scheduling.
+This project focuses on building a regression-based machine learning system to forecast the number of seats likely to be sold per ride. The goal is to assist transportation providers in making informed decisions related to capacity planning, pricing strategies, and scheduling by leveraging historical data and predictive modeling.
 
 Objectives
-Optimize fleet and seat allocation
-Reduce overbooking and underutilization
-Improve operational efficiency
-Enable data-driven transport planning
-Visualize demand patterns for better insights
+
+The primary objective of this project is to optimize fleet and seat allocation while reducing overbooking and underutilization. It also aims to improve operational efficiency, enable data-driven transport planning, and provide meaningful visualizations that reveal demand patterns and trends.
+
 Workflow
-Data Loading and Preprocessing
-Imported required libraries for data processing, modeling, evaluation, and visualization
-Loaded dataset: train_final.csv
-Aggregated passenger-level data into ride-level features using ride_id
-Feature Engineering
-Created time-based features (hour, day, month)
-Generated route and slot identifiers
-Built interaction features such as fuel × distance
-Added booking behavior metrics like urgency and lead time
-Incorporated weekend and holiday indicators
-Encoding Techniques
-Applied label encoding for categorical variables
-Implemented K-Fold smoothed mean encoding to capture historical demand patterns and reduce overfitting
-Feature Enhancement
-Created additional interaction features:
-demand × time
-fare × distance
-lead time × slot
+
+The workflow begins with data loading and preprocessing, where essential libraries for data handling, modeling, evaluation, and visualization are imported. The dataset train_final.csv is loaded and passenger-level data is aggregated into ride-level features using the ride_id.
+
+Feature engineering plays a crucial role in enhancing model performance. Time-based features such as hour, day, and month are extracted to capture temporal patterns. Route and slot identifiers are generated to represent travel segments, while interaction features such as fuel multiplied by distance are created to capture combined effects. Booking behavior is modeled using variables like urgency and lead time, and additional indicators such as weekends and holidays are incorporated.
+
+Categorical variables are handled using label encoding, while K-Fold smoothed mean encoding is applied to capture historical demand patterns more effectively and reduce overfitting. Further feature enhancement is achieved by introducing interaction terms such as demand with time, fare with distance, and lead time with slot.
+
 Model Training
-Linear Models
-Linear Regression
-Ridge
-Lasso
-ElasticNet
-Huber
-Distance-Based Models
-K-Nearest Neighbors (KNN)
-Support Vector Regression (SVR)
-Tree-Based Models
-Decision Tree
-Ensemble Models
-Random Forest
-Bagging
-Extra Trees
-Boosting Models
-Gradient Boosting Machine (GBM)
-AdaBoost
-XGBoost
-LightGBM
-CatBoost
+
+A wide range of machine learning models are trained and evaluated to identify the best-performing approach. Linear models such as Linear Regression, Ridge, Lasso, ElasticNet, and Huber are used as baselines. Distance-based methods including K-Nearest Neighbors and Support Vector Regression are also explored.
+
+Tree-based models such as Decision Trees provide non-linear modeling capabilities, while ensemble techniques including Random Forest, Bagging, and Extra Trees improve performance through aggregation. Boosting models such as Gradient Boosting Machine, AdaBoost, XGBoost, LightGBM, and CatBoost are employed to capture complex patterns and interactions in the data.
+
 Model Evaluation
 
-Models were evaluated using:
+The models are evaluated using standard regression metrics including R² Score, Mean Absolute Error (MAE), and Root Mean Squared Error (RMSE). Additional evaluation techniques such as learning curves are used to analyze model performance over iterations, and staged predictions are applied particularly for boosting models to track improvements progressively.
 
-R² Score
-Mean Absolute Error (MAE)
-Root Mean Squared Error (RMSE)
-
-Additional evaluation included:
-
-Learning curves for boosting and ensemble models
-Iterative performance tracking using staged predictions
 Visualization
 
-The following visualizations were generated:
+Various visualizations are generated to interpret model performance and data patterns effectively. These include predicted versus actual plots to assess accuracy, model comparison charts to rank models based on evaluation metrics, learning curves for ensemble and boosting techniques, and feature importance plots to identify the most influential variables.
 
-Predicted vs Actual plots
-Model comparison charts (R², MAE, RMSE, ranking)
-Learning curves for ensemble and boosting models
-Feature importance dashboards
 Key Insights
-Time-Based Demand Patterns
 
-Passenger demand varies significantly with hour, day of the week, and month. Peak demand is consistently observed during morning and evening hours, indicating strong commuter patterns.
+The analysis reveals that passenger demand is highly dependent on time-based patterns, with consistent peaks observed during morning and evening hours, reflecting commuter behavior. Demand during weekends and holidays shows greater variability and is influenced more by leisure travel patterns.
 
-Impact of Weekends and Holidays
+Route-specific features such as travel origin, route identifiers, and slot encodings emerge as strong predictors, indicating that location plays a significant role in demand forecasting. Booking behavior variables, particularly urgency and lead time, significantly impact predictions, with shorter lead times leading to higher variability.
 
-Features such as is_weekend, is_holiday, and is_school_hol show noticeable variations in demand during non-working days. Weekend demand is less predictable and often reflects leisure travel behavior.
+Ensemble and boosting models outperform simpler models, highlighting the presence of complex non-linear relationships in the data. Feature engineering, especially the use of interaction features, substantially improves model accuracy. Smoothed mean encoding effectively captures historical demand trends, further enhancing predictive performance. External factors such as fuel prices, weather conditions, and competition have some influence but are less significant compared to time and route-based features.
 
-Route and Location Importance
+Conclusion
 
-Encoded features such as route, travel_from, and slot-based encodings are among the most important predictors. This highlights the importance of location-specific travel behavior.
+Passenger demand is influenced by a combination of temporal patterns, route characteristics, booking behavior, and seasonal effects. The findings indicate that demand is driven by complex interactions among multiple variables rather than a single dominant factor. The use of advanced machine learning models and feature engineering techniques enables accurate and reliable predictions.
 
-Booking Behavior Influence
+Future Improvements
 
-Variables such as booking urgency, ticket lead time, and lead spread significantly impact demand predictions. Shorter booking lead times are associated with higher demand variability.
+Future enhancements to this project include incorporating real-time data for dynamic predictions, exploring deep learning approaches such as LSTM models for time-series forecasting, deploying the system as an interactive web-based dashboard, and integrating pricing optimization strategies to further improve decision-making.
 
-Model Performance
+Tech Stack
 
-Ensemble and boosting models such as XGBoost, LightGBM, Random Forest, and CatBoost outperform linear and distance-based models, indicating strong non-linear relationships in the data.
+The project is implemented using Python along with libraries such as Pandas and NumPy for data processing, Scikit-learn for machine learning, XGBoost, LightGBM, and CatBoost for advanced modeling, and Matplotlib and Seaborn for visualization.
 
-Importance of Feature Engineering
+Dataset
 
-Interaction features (e.g., fuel × distance, slot × week, lead × holiday) significantly improve model performance, showing that demand is influenced by combined feature effects.
-
-Effectiveness of Mean Encoding
-
-Smoothed target encoding features such as slot_mean, route_mean, and origin_mean effectively capture historical demand patterns and improve prediction accuracy.
-
-External Factors
-
-Variables such as fuel price, weather conditions, distance, and competition have some influence on demand, though less significant than time and route-based factors.
-
-Model Consistency
-
-Top-performing models produce consistent predictions, indicating stable patterns and reliable learning.
-
-Conclusion:
-Passenger demand is influenced by a combination of time-based patterns, route characteristics, booking behavior, and seasonal effects. Demand is not driven by a single factor but by complex interactions between multiple variables.
-
-Future Improvements:
-Incorporate real-time data
-Explore deep learning approaches such as LSTM for time-series forecasting
-Deploy as a web-based dashboard
-Integrate pricing optimization strategies
+The dataset used in this project is train_final.csv, which contains aggregated ride-level information derived from passenger booking data.
